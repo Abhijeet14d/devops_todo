@@ -4,7 +4,6 @@ import Logo from "../components/Logo.jsx";
 import Alert from "../components/Alert.jsx";
 import PrimaryButton from "../components/PrimaryButton.jsx";
 import { resendVerification, verifyEmailToken } from "../services/api.js";
-import useAuth from "../hooks/useAuth.js";
 
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams();

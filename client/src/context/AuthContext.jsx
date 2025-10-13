@@ -8,6 +8,15 @@ const STORAGE_KEY = "devopsapp_auth_token";
 
 const AuthContext = createContext(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
+export const useAuthContext = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuthContext must be used within AuthProvider");
+  }
+  return context;
+};
+
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem(STORAGE_KEY));
   const [user, setUser] = useState(null);
@@ -79,12 +88,4 @@ export const AuthProvider = ({ children }) => {
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
-
-export const useAuthContext = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuthContext must be used within AuthProvider");
-  }
-  return context;
 };
