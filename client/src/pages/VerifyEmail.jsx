@@ -9,7 +9,6 @@ import useAuth from "../hooks/useAuth.js";
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { login } = useAuth();
   const [status, setStatus] = useState({ state: "idle" });
   const [email, setEmail] = useState("");
 

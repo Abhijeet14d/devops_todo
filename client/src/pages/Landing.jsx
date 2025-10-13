@@ -40,7 +40,7 @@ const Landing = () => {
         </div>
 
         <div className="grid w-full gap-6 sm:grid-cols-3">
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <div
               key={feature}
               className="group relative overflow-hidden rounded-2xl border border-slate-800/50 bg-gradient-to-br from-slate-900/80 to-slate-900/40 p-8 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:border-sky-500/30 hover:shadow-sky-500/10"
