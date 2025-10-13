@@ -34,6 +34,8 @@ const userSchema = new mongoose.Schema(
 		},
 		verificationTokenHash: String,
 		verificationTokenExpires: Date,
+			lastVerificationTokenHash: String,
+			verificationTokenUsedAt: Date,
 	},
 	{
 		timestamps: true,

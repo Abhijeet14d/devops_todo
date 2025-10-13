@@ -67,6 +67,7 @@ export const register = asyncHandler(async (req, res) => {
 		password,
 		verificationTokenHash,
 		verificationTokenExpires,
+		lastVerificationTokenHash: verificationTokenHash,
 	});
 
 	await sendVerificationEmail(email, verificationToken);
@@ -95,6 +96,8 @@ export const verifyEmail = asyncHandler(async (req, res) => {
 	user.isVerified = true;
 	user.verificationTokenHash = undefined;
 	user.verificationTokenExpires = undefined;
+	user.verificationTokenUsedAt = new Date();
+	user.lastVerificationTokenHash = hashedToken;
 	await user.save();
 
 	respondWithAuth(res, user);
@@ -123,6 +126,8 @@ export const resendVerification = asyncHandler(async (req, res) => {
 	const verificationToken = crypto.randomBytes(32).toString("hex");
 	user.verificationTokenHash = crypto.createHash("sha256").update(verificationToken).digest("hex");
 	user.verificationTokenExpires = new Date(Date.now() + verificationTokenTTL);
+	user.lastVerificationTokenHash = user.verificationTokenHash;
+	user.verificationTokenUsedAt = undefined;
 	await user.save();
 
 	await sendVerificationEmail(email, verificationToken);

@@ -16,15 +16,20 @@ const PORT = process.env.PORT || 5000;
 
 await connectDB();
 
-const allowedOrigins = (process.env.CLIENT_URL || "")
+const defaultOrigins = ["http://localhost:5173"];
+const configuredOrigins = (process.env.CLIENT_URL || "")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+const allowedOrigins = Array.from(new Set([...defaultOrigins, ...configuredOrigins]));
+
 app.use(
   cors({
-    origin: allowedOrigins.length ? allowedOrigins : undefined,
-    credentials: allowedOrigins.length > 0,
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
