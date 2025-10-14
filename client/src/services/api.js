@@ -1,4 +1,17 @@
-const API_BASE = import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "http://localhost:5000/api";
+const sanitizeBase = (value) => (value ? value.replace(/\/$/, "") : value);
+
+const inferBaseFromWindow = () => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const origin = window.location.origin;
+  return `${origin}/api`;
+};
+
+const apiBaseCandidate = import.meta.env.VITE_API_URL || inferBaseFromWindow() || "http://localhost:5000/api";
+
+const API_BASE = sanitizeBase(apiBaseCandidate);
 
 const buildHeaders = (token, extraHeaders = {}) => {
   const headers = { "Content-Type": "application/json", ...extraHeaders };
