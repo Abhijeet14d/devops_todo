@@ -5,8 +5,15 @@ const inferBaseFromWindow = () => {
     return null;
   }
 
-  const origin = window.location.origin;
-  return `${origin}/api`;
+  const { protocol, hostname, port } = window.location;
+  const isStandardPort = !port || port === "80" || port === "443";
+
+  if (isStandardPort) {
+    return `${protocol}//${hostname}/api`;
+  }
+
+  const backendPort = ["3000", "5173"].includes(port) ? "5000" : port;
+  return `${protocol}//${hostname}:${backendPort}/api`;
 };
 
 const apiBaseCandidate = import.meta.env.VITE_API_URL || inferBaseFromWindow() || "http://localhost:5000/api";
