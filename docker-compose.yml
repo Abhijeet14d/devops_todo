@@ -37,6 +37,8 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://server:5000/api}
     container_name: devopsapp-client
     restart: unless-stopped
     ports:
