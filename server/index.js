@@ -24,9 +24,9 @@ const defaultOrigins = [
   "http://127.0.0.1:3000",
   "http://localhost",
   "http://127.0.0.1",
-  "http://13.60.229.21",
-  "http://13.60.229.21:3000",
-  "https://13.60.229.21",
+  "http://13.53.106.198",
+  "http://13.53.106.198:3000",
+  "https://13.53.106.198",
 ].map(normalizeOrigin);
 
 const configuredOrigins = (process.env.CLIENT_URL || "")

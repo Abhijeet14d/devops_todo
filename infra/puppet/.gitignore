@@ -1,0 +1,4 @@
+# Ignore local Hiera secrets and compiled artifacts
+/data/secrets.yaml
+*.rbc
+pkg/
