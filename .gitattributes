@@ -1,0 +1,23 @@
+# Normalize line endings and enforce LF where required
+* text=auto
+
+# Always use LF for scripts and config consumed on Linux
+*.sh text eol=lf
+*.bash text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.tf text eol=lf
+Dockerfile text eol=lf
+
+# Optional: keep .env text-normalized (LF)
+.env text eol=lf
+
+# Keep images/binaries untouched
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
